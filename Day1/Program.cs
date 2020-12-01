@@ -16,17 +16,17 @@ namespace advent_code
             var part2Found = false;
             int? part1 = null;
             int? part2 = null;
-            for (var i = 0; i < ascendingOrder.Count(); i++)
+            for (var i = 0; i < ascendingOrder.Length; i++)
             {
                 if (part1Found && part2Found)
                     break;
-                for (var y = i + 1; y < ascendingOrder.Count(); y++)
+                for (var y = i + 1; y < ascendingOrder.Length; y++)
                 {
                     if (!part1Found && Sums2020(ascendingOrder[i], ascendingOrder[y]))
                     {
                         part1 = ascendingOrder[i] * ascendingOrder[y];
                     }
-                    for (var x = y + 1; x < ascendingOrder.Count(); x++)
+                    for (var x = y + 1; x < ascendingOrder.Length; x++)
                     {
                         if (!part2Found && Sums2020(ascendingOrder[i], ascendingOrder[y], ascendingOrder[x]))
                         {
