@@ -4,8 +4,6 @@ namespace Day5
 {
     class Program
     {
-        private const int HigherBound = 127;
-        private const int LowerBound = 0;
 
         static void Main(string[] args)
         {
@@ -19,14 +17,13 @@ namespace Day5
             foreach(var row in text)
             {
                 var position = new Position();
-                position = Switch(row[0], LowerBound, HigherBound, position);
-                position = NewMethod(row[1], position, LowerBound, HigherBound);
-                position = Switch(row[1], 0, HigherBound, position);
-                position = Switch(row[2], 0, HigherBound, position);
-                position = Switch(row[3], 0, HigherBound, position);
-                position = Switch(row[4], 0, HigherBound, position);
-                position = Switch(row[5], 0, HigherBound, position);
-                position = Switch(row[6], 0, HigherBound, position);
+                foreach (var c in row)
+                {
+                    position = Switch(c, LowerBound, HigherBound, position);
+                    position = NewMethod(c, position, LowerBound, HigherBound);
+                    
+                }
+               
             }
         }
 
@@ -65,7 +62,7 @@ namespace Day5
     }
     class Position
     {
-        public int lower;
-        public int higher;
+        public int lower = 0;
+        public int higher = 127;
     }
 }
