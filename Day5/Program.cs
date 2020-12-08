@@ -17,40 +17,54 @@ namespace Day5
             foreach(var row in text)
             {
                 var position = new Position();
-                foreach (var c in row)
+                
+                position = Switch(row[0], 0, 127, position);
+                position = Switch(row[1], position.lower, position.higher, position);
+                position = Switch(row[2], position.lower, position.higher, position);
+                position = Switch(row[3], position.lower, position.higher, position);
+                position = Switch(row[4], position.lower, position.higher, position);
+                position = Switch(row[5], position.lower, position.higher, position);
+                position = Switch(row[6], position.lower, position.higher, position);
+                
+                Console.WriteLine(position.higher + " " + position.lower);
+                var seatPosition = new Position {lower = 0, higher = 7};
+
+                for (var i = 7; i < 10; i++)
                 {
-                    position = Switch(c, LowerBound, HigherBound, position);
-                    position = NewMethod(c, position, LowerBound, HigherBound);
-                    
+                    seatPosition = SwitchSeat(row[i], seatPosition.lower, seatPosition.higher, seatPosition, i);
                 }
-               
+                if (seatPosition.lower + position.lower * 8 > highestSeatId)
+                {
+                    highestSeatId = seatPosition.lower + position.lower * 8;
+                }
             }
+            Console.WriteLine(highestSeatId);
         }
 
-        private static Position NewMethod(char c, Position position, int lower, int higher)
-        {
-            if (position.lower == lower)
-            {
-                position = Switch(c, lower, higher / 2, position);
-            }
-            else
-            {
-                position = Switch(c, higher / 2, higher, position);
-            }
-
-            return position;
-        }
-
-        public static Position Switch(char c, int lowerBound, int higherBound, Position position)
+        public static Position Switch(char c, int lower, int higher, Position position)
         {
             switch(c){
                     case 'F': 
-                        position.higher = higherBound / 2;
-                        position.lower = lowerBound;
+                        position.higher = (higher + lower )/ 2;
+                        position.lower = lower;
                         break;
                     case 'B':
-                        position.lower = higherBound / 2;
-                        position.higher = higherBound;
+                        position.lower = (higher + lower )/ 2 + 1;
+                        position.higher = higher;
+                        break; 
+            }
+            return position;
+        }
+        public static Position SwitchSeat(char c, int lower, int higher, Position position, int i)
+        {
+            switch(c){
+                    case 'L': 
+                        position.higher = (higher + lower )/ 2;
+                        position.lower = lower;
+                        break;
+                    case 'R':
+                        position.lower = (higher + lower )/ 2 + 1;
+                        position.higher = higher;
                         break; 
             }
             return position;
