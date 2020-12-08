@@ -13,7 +13,7 @@ namespace Day6
             int count = 0;
             foreach(var doc in customsDocs)
             {
-                var array = doc.ToCharArray();
+                var array = doc.Replace("\r\n", "").ToCharArray();
                 var list = new List<string>();
                 foreach(var c in array)
                 {
