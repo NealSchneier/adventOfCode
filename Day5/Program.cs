@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Day5
 {
@@ -9,6 +11,33 @@ namespace Day5
         {
             var text = System.IO.File.ReadAllLines("Day5/input.txt");
             TestPart1(text);
+            TestPart2(text);
+        }
+         public static void TestPart2(string[] text)
+        {
+            var highestSeatId = new List<int>();
+            foreach(var row in text)
+            {
+                var position = new Position();
+                
+                position = Switch(row[0], 0, 127, position);
+                position = Switch(row[1], position.lower, position.higher, position);
+                position = Switch(row[2], position.lower, position.higher, position);
+                position = Switch(row[3], position.lower, position.higher, position);
+                position = Switch(row[4], position.lower, position.higher, position);
+                position = Switch(row[5], position.lower, position.higher, position);
+                position = Switch(row[6], position.lower, position.higher, position);
+                
+                var seatPosition = new Position {lower = 0, higher = 7};
+
+                for (var i = 7; i < 10; i++)
+                {
+                    seatPosition = SwitchSeat(row[i], seatPosition.lower, seatPosition.higher, seatPosition, i);
+                }
+                highestSeatId.Add(seatPosition.lower + position.lower * 8);
+            }
+            var numberList = Enumerable.Range(1, 1000).ToList();
+            Console.WriteLine(string.Join(", ", numberList.Except(highestSeatId).OrderBy(x => x)));
         }
 
         public static void TestPart1(string[] text)
@@ -26,7 +55,6 @@ namespace Day5
                 position = Switch(row[5], position.lower, position.higher, position);
                 position = Switch(row[6], position.lower, position.higher, position);
                 
-                Console.WriteLine(position.higher + " " + position.lower);
                 var seatPosition = new Position {lower = 0, higher = 7};
 
                 for (var i = 7; i < 10; i++)
