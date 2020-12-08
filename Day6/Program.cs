@@ -10,7 +10,7 @@ namespace Day6
         {
             var text = System.IO.File.ReadAllText("Day6/input.txt");
             var customsDocs = text.Split(Environment.NewLine + Environment.NewLine);
-            //Part1(customsDocs);
+            Part1(customsDocs);
             Part2(customsDocs);
         }
         private static void Part2(string[] customsDocs)

@@ -22,6 +22,16 @@
                 "${workspaceFolder}/Day6/Day6.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "build7",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Day7/Day7.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
