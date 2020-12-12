@@ -24,12 +24,12 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "taskName": "build7",
+            "taskName": "build8",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Day7/Day7.csproj"
+                "${workspaceFolder}/Day8/Day8.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
